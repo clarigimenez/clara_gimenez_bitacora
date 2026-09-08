@@ -1,0 +1,9 @@
+Variable,Tipo,Valores,Faltante,Pregunta
+id,entero,"1, 2, …",no admite,*Lo completa el encuestador*
+frecuencia,ordinal,Nunca < 1 a 3 veces < 4 a 8 veces < Más de 8 veces,NA,¿Con que frecuencia realizas compras en la cafetería?
+"prod_cafe, prod_comida, prod_frias, prod_otros",binaria (×4),"0, 1",NA si frecuencia = Nunca,"¿El tipo de producto que sueles consumir es cafe, comida, frias u otros?"
+atencion,ordinal,1 < 2 < 3 < 4 < 5,NA si frecuencia = Nunca,¿Como calificarías de la atención del personal?
+"pago_efectivo, pago_tarjeta, pago_transferencia",binaria (×3),"0, 1",NA si frecuencia = Nunca,"¿Que metodo de pago prefieres, efectivo, tarjeta o transferencia?"
+estudiante,binaria,"TRUE, FALSE",NA,¿Eres estudiante de la facultad?
+edad,cuantitativa,años,NA,¿Cuantos años tienes?
+mejora,texto,libre,vacío,Comentanos en que podria mejorar la cafetería.

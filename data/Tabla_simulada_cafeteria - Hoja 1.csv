@@ -1,0 +1,11 @@
+id,frecuencia,prod_cafe,prod_comida,prod_frias,prod_otros,atencion,pago_efectivo,pago_tarjeta,pago_transferencia,estudiante,edad,mejora
+1,Nunca,0,NA,NA,NA,NA,NA,NA,NA,NA,NA,
+2,1 a 3 veces,0,0,0,1,2,0,1,0,TRUE,19,Mejor atención
+3,Más de 8 veces,1,0,0,1,5,0,0,1,TRUE,21,Mejor cobro automático
+4,4 a 8 veces,0,1,0,0,5,1,0,0,FALSE,42,Más variedad
+5,1 a 3 veces,1,0,1,1,4,0,0,1,FALSE,51,
+6,4 a 8 veces,1,1,1,1,4,0,1,0,TRUE,23,Mejor cobro automático
+7,1 a 3 veces,1,1,0,0,3,0,0,1,TRUE,20,Más prensas de calor
+8,1 a 3 veces,1,0,0,0,4,0,1,0,TRUE,21,Mas personal
+9,Nunca,0,NA,NA,NA,NA,NA,NA,NA,NA,NA,
+10,Nunca,0,NA,NA,NA,NA,NA,NA,NA,NA,NA,
