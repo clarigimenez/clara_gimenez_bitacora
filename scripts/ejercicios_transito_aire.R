@@ -66,6 +66,9 @@ faltantes_datos <- datos |>
             sin_log_pm25     = sum(is.na(log_pm25)))
 print(faltantes_datos, width = Inf)
 
+#franja, tipo_dia y transito_rel tienen 0 faltantes en las tres estaciones.
+#log_pm25 tiene exactamente los mismos faltantes que pm25 (0, 144 y 326).
+
 # =============================================================================
 # EJERCICIO 2. ¿ESTÁ BIEN DEFINIDA LA HORA PICO?
 # =============================================================================
@@ -73,6 +76,7 @@ print(faltantes_datos, width = Inf)
 # El gráfico muestra el tránsito promedio de cada hora del día en Tres Cruces,
 # de lunes a viernes, con las horas pico en color.
 
+#ACORDATE DE SELECCIONAR EL BLOQUE Y DARLE A RUN PARA VER EL GRAFICO
 por_hora <- datos |>
   filter(estacion == "Tres Cruces", tipo_dia == "lunes a viernes") |>
   group_by(h, hora_pico) |>
@@ -87,11 +91,28 @@ ggplot(por_hora, aes(h, transito, fill = hora_pico)) +
 # 1. Mirar el gráfico: ¿las horas en color son las de más tránsito?
 #    Anotar qué horas están mal clasificadas.
 
-# Horas mal clasificadas: 
+# No, las horas en color no son las de más transito. 
+# Mal clasificadas: 7, 18 y 19 (marcadas de más) y 10, 11, 12, 13, 14, 15 y 16 (no marcadas de menos).
 
 # 2. Crear en datos una variable nueva, con el nombre que elijan, que marque
 #    las horas que según el gráfico tienen más tránsito.
+
+datos <- datos |>
+  mutate(hora_alta = ifelse(h %in% 8:17, "tránsito alto", "resto"))
+
 # 3. Repetir el gráfico usando la variable nueva en lugar de hora_pico.
+
+por_hora2 <- datos |>
+  filter(estacion == "Tres Cruces", tipo_dia == "lunes a viernes") |>
+  group_by(h, hora_alta) |>
+  summarise(transito = mean(transito), .groups = "drop")
+
+ggplot(por_hora2, aes(h, transito, fill = hora_alta)) +
+  geom_col() +
+  scale_fill_manual(values = c("tránsito alto" = "#5C3A21", "resto" = "grey75")) +
+  labs(title = "Tránsito promedio por hora del día, Tres Cruces, lunes a viernes",
+       subtitle = "Horas de tránsito alto definidas según el gráfico (8 a 17 h)",
+       x = "Hora del día", y = "Vehículos por hora", fill = NULL)
 # -----------------------------------------------------------------------------
 
 # =============================================================================
