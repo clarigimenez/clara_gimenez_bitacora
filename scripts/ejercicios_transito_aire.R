@@ -126,6 +126,36 @@ ggplot(por_hora2, aes(h, transito, fill = hora_alta)) +
 #    (COL_PM25).
 # 2. La línea punteada en 1 ya no tiene sentido: sacarla.
 # 3. ¿En qué franja es máximo el PM2.5? ¿Coincide con la del tránsito?
+
+COL_PM25     <- "#D4A373"
+
+por_franja <- datos |>
+  group_by(estacion, franja) |>
+  summarise(transito     = mean(transito),
+            transito_rel = mean(transito),
+            no2          = mean(no2, na.rm = TRUE),
+            pm25         = mean(pm25, na.rm = TRUE),
+            .groups = "drop")
+print(por_franja)
+
+g9 <- ggplot(por_franja, aes(franja, transito_rel)) +
+  geom_col(fill = COL_TRANSITO) +
+  geom_hline(yintercept = 1, color = "grey40", linetype = "dashed") +
+  facet_wrap(~ estacion) +
+  labs(title = "Tránsito por franja horaria, relativo a la media de la estación",
+       x = NULL, y = "Tránsito relativo (1 = media de la estación)")
+print(g9)
+
+g9_pm25 <- ggplot(por_franja, aes(franja, pm25)) +
+  geom_col(fill = COL_PM25) +
+  facet_wrap(~ estacion) +
+  labs(title = "PM2.5 promedio por franja horaria",
+       x = NULL, y = "PM2.5 (µg/m³)")
+print(g9_pm25)
+
+# PM2.5 es máximo en la franja de la noche, 
+#lo que no coincide con el transito que es máximo en la tarde 
+
 # -----------------------------------------------------------------------------
 
 
